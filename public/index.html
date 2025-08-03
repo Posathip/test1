@@ -4,21 +4,44 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Your Name - Resume</title>
+
+  <!-- Bootstrap 5 CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    h2, h3 {
+      color: #343a40;
+    }
+
+    img {
+      max-width: 200px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+  </style>
 </head>
 <body>
   <div class="container py-5">
     <div class="row">
+      <!-- Profile Sidebar -->
       <div class="col-md-4 text-center">
         <img src="public/images/face.jpg" class="img-fluid rounded-circle mb-3" alt="Profile Photo" />
         <h2>Your Name</h2>
         <h5 class="text-muted">Your Position</h5>
         <p>Email: your.email@example.com<br>Phone: +1234567890</p>
       </div>
+
+      <!-- Resume Main -->
       <div class="col-md-8">
         <h3>About Me</h3>
-        <p>I am a passionate developer with experience in web and software development...</p>
+        <p>I am a passionate developer with experience in web and software development. I enjoy building scalable, clean, and user-focused applications using modern technologies.</p>
 
         <h3>Skills</h3>
         <ul>
@@ -29,20 +52,20 @@
         </ul>
 
         <h3>Experience</h3>
-        <div>
+        <div class="mb-4">
           <h5>Company Name</h5>
-          <p class="text-muted">Job Title (Year - Year)</p>
-          <p>Describe your role, achievements, and key responsibilities.</p>
+          <p class="text-muted">Job Title (2021 - Present)</p>
+          <p>Lead front-end developer responsible for building responsive UI and integrating RESTful APIs.</p>
         </div>
 
-        <div>
+        <div class="mb-4">
           <h5>Another Company</h5>
-          <p class="text-muted">Job Title (Year - Year)</p>
-          <p>Highlights of work and technologies used.</p>
+          <p class="text-muted">Software Engineer (2019 - 2021)</p>
+          <p>Built internal tools with Django and PostgreSQL to automate business processes.</p>
         </div>
 
         <h3>Education</h3>
-        <p><strong>University Name</strong> – Degree (Year)</p>
+        <p><strong>University Name</strong> – Bachelor of Science in Computer Science (2015 - 2019)</p>
       </div>
     </div>
   </div>
