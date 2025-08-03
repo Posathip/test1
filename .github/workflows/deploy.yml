@@ -20,18 +20,17 @@ jobs:
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
           channelId: live
           projectId: imakeflutterapp
-      - name: Send email notification
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: "🚀 Firebase Deploy Completed"
-          to: you@example.com
-          from: "GitHub Actions <noreply@github.com>"
-          content_type: text/html
-          body: |
-            <h3>🎉 Deployment Success!</h3>
-            <p>Your Firebase app has been deployed successfully.</p>
-            <p><a href="https://your-project-id.web.app">Open App</a></p>
+      - name: Send LINE Message via Messaging API
+        run: |
+          curl -X POST https://api.line.me/v2/bot/message/push \
+          -H 'Content-Type: application/json' \
+          -H 'Authorization: Bearer ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}' \
+          -d '{
+            "to": "${{ secrets.LINE_USER_ID }}",
+            "messages":[
+              {
+                "type":"text",
+                "text":"🚀 Firebase Deploy Completed Successfully!"
+              }
+            ]
+          }'
