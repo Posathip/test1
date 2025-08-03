@@ -30,7 +30,7 @@ jobs:
             "messages":[
               {
                 "type":"text",
-                "text":"🚀 Firebase Deploy Completed Successfully!"
+                  "text":"🚀 Firebase Deploy Completed Successfully!\n🌐 Visit: https://imakeflutterapp.web.app"
               }
             ]
           }'
