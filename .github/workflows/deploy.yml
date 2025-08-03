@@ -20,17 +20,26 @@ jobs:
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
           channelId: live
           projectId: imakeflutterapp
-      - name: Send LINE Message via Messaging API
+      - name: Send LINE Message on Success or Failure
+        if: always()
         run: |
+         if [ "${{ job.status }}" == "success" ]; then
+          STATUS="✅ Deploy Successful!"
+         COLOR="green"
+         else
+          STATUS="❌ Deploy Failed!"
+          COLOR="red"
+          fi
+
           curl -X POST https://api.line.me/v2/bot/message/push \
           -H 'Content-Type: application/json' \
           -H 'Authorization: Bearer ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}' \
-          -d '{
-            "to": "${{ secrets.LINE_USER_ID }}",
-            "messages":[
+          -d "{
+            \"to\": \"${{ secrets.LINE_USER_ID }}\",
+            \"messages\":[
               {
-                "type":"text",
-                  "text":"🚀 Firebase Deploy Completed Successfully!\n🌐 Visit: https://imakeflutterapp.web.app"
+                \"type\":\"text\",
+                \"text\":\"$STATUS\n🌐 Visit: https://imakeflutterapp.web.app\"
               }
             ]
-          }'
+          }"
