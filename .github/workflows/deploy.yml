@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      FIREBASE_PROJECT_ID: "${{ secrets.PROJECT_ID }}"  
 
     steps:
       - name: Checkout source code
@@ -19,16 +21,15 @@ jobs:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
           channelId: live
-          projectId: imakeflutterapp
+          projectId: "${{ secrets.PROJECT_ID }}"
+
       - name: Send LINE Message on Success or Failure
         if: always()
         run: |
-         if [ "${{ job.status }}" == "success" ]; then
-          STATUS="✅ Deploy Successful!"
-         COLOR="green"
-         else
-          STATUS="❌ Deploy Failed!"
-          COLOR="red"
+          if [ "${{ job.status }}" == "success" ]; then
+            STATUS=" Deploy Successful!"
+          else
+            STATUS=" Deploy Failed!"
           fi
 
           curl -X POST https://api.line.me/v2/bot/message/push \
@@ -39,7 +40,7 @@ jobs:
             \"messages\":[
               {
                 \"type\":\"text\",
-                \"text\":\"$STATUS\n🌐 Visit: https://imakeflutterapp.web.app\"
+                \"text\":\"$STATUS\n Visit: https://${{ secrets.PROJECT_ID}}.web.app\"
               }
             ]
           }"
