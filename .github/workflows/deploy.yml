@@ -25,6 +25,8 @@ jobs:
 
       - name: Send LINE Message on Success or Failure
         if: always()
+        env:
+          PROJECT_ID: ${{ secrets.PROJECT_ID }}
         run: |
           if [ "${{ job.status }}" == "success" ]; then
             STATUS=" Deploy Successful!"
@@ -40,7 +42,8 @@ jobs:
             \"messages\":[
               {
                 \"type\":\"text\",
-                \"text\":\"$STATUS\n Visit: https://${{ secrets.PROJECT_ID}}.web.app\"
+                \"text\":\"$STATUS\n🌐 Visit: https://${PROJECT_ID}.web.app\"
+
               }
             ]
           }"
